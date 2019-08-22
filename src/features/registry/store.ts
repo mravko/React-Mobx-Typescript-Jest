@@ -1,5 +1,11 @@
-import { observable } from 'mobx'
+import { observable, action } from 'mobx';
+import { BaseStore } from "../../common/stores/base-store"
 
-class RegistryStore {
+export class RegistryStore extends BaseStore {
 	@observable name: string;
+
+	@action
+	changeName(newName: string) {
+		this.name = newName;
+	}
 }

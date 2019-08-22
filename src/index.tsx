@@ -1,18 +1,19 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { RegistryStore } from "./features/registry/store"
+import { Provider, inject } from 'mobx-react';
+import { App } from "./app"
+import { configure } from "mobx";
 
-class App extends React.Component {
-    num: number;
-    render() {
-        this.num = 5;
-        return <div>hello from app {this.num} </div>;
-    }
+configure({ enforceActions: "always" });
+
+const stores = {
+    store: new RegistryStore()
 }
 
 ReactDOM.render(
-    <div>
+    <Provider {...stores}>
         <App />
-    </div>,
+    </Provider>,
     document.getElementById("root")
 );
-
