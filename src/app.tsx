@@ -22,7 +22,7 @@ export class App extends React.Component<AppProps> {
 			<AppComponent>
 				<input type="text" ref={(ref => this.inputRef = ref)}></input>
 				<button onClick={() => store.changeName(this.inputRef.value)}>Send</button>
-				Hello {store.name}
+				Hello {store.name}!
 			</AppComponent>);
 	}
 }
