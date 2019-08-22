@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server",
+    "test": "npx jest",
     "pack": "npx webpack"
   },
   "author": "",

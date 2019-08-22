@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { RegistryStore } from "./features/registry/store"
+import { RegistryStore } from "./features/registry/stores/store"
 import { Provider, inject } from 'mobx-react';
 import { App } from "./app"
 import { configure } from "mobx";
@@ -8,7 +8,7 @@ import { configure } from "mobx";
 configure({ enforceActions: "always" });
 
 const stores = {
-    store: new RegistryStore()
+    registryStore: new RegistryStore()
 }
 
 ReactDOM.render(
