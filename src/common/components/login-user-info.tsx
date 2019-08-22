@@ -63,13 +63,16 @@ export class LogOutUserInfo extends React.Component<IUserInfoProps> {
 
 	render() {
 		return (
-			<div>
+			<form onSubmit={(e) => {
+				e.preventDefault();
+				this.store.login(this.usernameRef.value, this.passwordRef.validationMessage);
+			}}>
 				You are not logged in!;
-				<input ref={(r) => this.usernameRef = r} type="text"></input>
-				<input ref={(r) => this.passwordRef = r} type="password"></input>
+				<input required ref={(r) => this.usernameRef = r} type="text"></input>
+				<input required ref={(r) => this.passwordRef = r} type="password"></input>
 
-				<button onClick={() => this.store.login(this.usernameRef.value, this.passwordRef.validationMessage)}>Log in</button>
-			</div>
+				<button type="submit">Log in</button>
+			</form>
 		);
 	}
 }
