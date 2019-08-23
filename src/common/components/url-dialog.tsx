@@ -11,9 +11,10 @@ export interface IUrlDialogComponentProps {
 export class UrlDialogComponent extends React.Component<IUrlDialogComponentProps>
 {
 	render() {
+		const path = `${this.props.match.url}/${this.props.route}`;
 		const Component = this.props.component;
 		return (
-			<Route path={`${this.props.match.url}/` + this.props.route} render={props => <Component {...props} />} {...this.props}>
+			<Route path={path} render={props => <Component {...props} />}>
 			</Route>
 		);
 	}
