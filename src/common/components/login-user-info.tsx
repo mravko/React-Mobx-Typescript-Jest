@@ -38,12 +38,12 @@ export class LoginUserInfo extends React.Component<IUserInfoProps> {
 
 	render() {
 		return (<React.Fragment>
-			<div>
+			<span>
 				Hello {this.store.loggedUserInfo.name}, you logged in on {this.store.loggedUserInfo.loginDate.toLocaleDateString()}
-			</div>
-			<div>
+			</span>
+			<span>
 				<button onClick={() => { this.store.logout() }}>Logout</button>
-			</div>
+			</span>
 		</React.Fragment>
 
 		);
