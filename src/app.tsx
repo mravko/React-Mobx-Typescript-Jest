@@ -30,7 +30,7 @@ export class App extends React.Component<AppProps> {
 					<Route exact path="/" component={null} />
 					<Route {...this.props} path="/registry" render={(props) =>
 						loggedIn ?
-							<RegistryComponent match={props.match} />
+							<RegistryComponent />
 							:
 							<div>You must be logged in</div>
 					} />
