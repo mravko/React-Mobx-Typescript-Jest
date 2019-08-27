@@ -1,18 +1,21 @@
-import * as React from 'react'
-import { Paper, Table, TableHead, TableCell, TableBody, TableRow } from '@material-ui/core'
-import styled from "styled-components"
-import { withTheme } from "@material-ui/styles"
+import * as React from 'react';
+import { Paper, Table, TableHead, TableCell, TableBody, TableRow } from '@material-ui/core';
+import styled from "styled-components";
+import { withTheme } from "@material-ui/styles";
+import { observer, inject } from 'mobx-react';
+import { TeamStore } from '../stores/store';
+import { SettingsComponent } from "./settings";
 
 const StyledPaper = withTheme(styled(Paper)`
     && {
         width: "100%";
-        marginTop: ${(props) => props.theme.spacing(3)}px;
-        overflowX: "auto";
+        margin-top: ${(props) => props.theme.spacing(3)}px;
+        overflow-x: "auto";
     }
 `);
 const StyledTable = styled(Table)`
     && {
-        minWidth: 650;
+        min-width: 650;
     }
 `;
 function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
@@ -25,35 +28,42 @@ const rows1 = [
     createData('Cupcake', 305, 3.7, 67, 4.3),
     createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
-export class TeamComponent extends React.Component {
+
+class TeamComponentProps {
+    teamStore?: TeamStore
+}
+
+@inject("teamStore")
+@observer
+export class TeamComponent extends React.Component<TeamComponentProps> {
+    componentDidMount() {
+        this.props.teamStore.initStore();
+    }
     render() {
         return (
-            <StyledPaper>
-                <StyledTable>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Dessert (100g serving)</TableCell>
-                            <TableCell align="right">Calories</TableCell>
-                            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                    {rows1.map(row => (
-                        <TableRow key={row.name}>
-                          <TableCell component="th" scope="row">
-                            {row.name}
-                          </TableCell>
-                          <TableCell align="right">{row.calories}</TableCell>
-                          <TableCell align="right">{row.fat}</TableCell>
-                          <TableCell align="right">{row.carbs}</TableCell>
-                          <TableCell align="right">{row.protein}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                </StyledTable>
-            </StyledPaper>
+            <React.Fragment>
+                <SettingsComponent />
+                <StyledPaper>
+                    <StyledTable>
+                        <TableHead>
+                            <TableRow>
+                                {
+                                    this.props.teamStore.playerAttributes.map((pa) =>
+                                        (<TableCell key={pa}>{pa}</TableCell>))
+                                }
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {this.props.teamStore.players.map(pl => (
+                                <TableRow key={pl.id}>
+                                    {this.props.teamStore.playerAttributes.map((pa) =>
+                                        (<TableCell key={pl[pa]}>{pl[pa]}</TableCell>))}
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </StyledTable>
+                </StyledPaper>
+            </React.Fragment>
         );
     }
 }

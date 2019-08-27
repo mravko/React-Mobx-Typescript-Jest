@@ -7,12 +7,14 @@ import { BrowserRouter as Router  } from "react-router-dom";
 
 import { UserStore } from "./common/stores/user-store";
 import { RegistryStore } from "./features/registry/stores/store"
+import { TeamStore } from "./features/team/stores/store";
 
 configure({ enforceActions: "always" });
 
 const stores = {
     registryStore: new RegistryStore(),
-    userStore: new UserStore()
+    userStore: new UserStore(),
+    teamStore: new TeamStore()
 }
 
 ReactDOM.render(
