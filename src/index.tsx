@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import { Provider } from 'mobx-react';
 import { App } from "./app"
 import { configure } from "mobx";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router  } from "react-router-dom";
 
 import { UserStore } from "./common/stores/user-store";
 import { RegistryStore } from "./features/registry/stores/store"
