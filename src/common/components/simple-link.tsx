@@ -12,11 +12,12 @@ const StyledSimpleLinkComponent = withTheme(styled(Link)`
 
 class SimpleLinkComponentProps {
     to: string = "";
+    linkClicked: React.MouseEventHandler<HTMLAnchorElement>;
 }
 export class SimpleLinkComponent extends React.Component<SimpleLinkComponentProps> {
     render() {
         return (
-            <StyledSimpleLinkComponent to={this.props.to}>
+            <StyledSimpleLinkComponent to={this.props.to} onClick={this.props.linkClicked}>
                 {this.props.children}
             </StyledSimpleLinkComponent>);
     }

@@ -19,13 +19,13 @@ class LeftDrawerProps {
 }
 
 export class LeftDrawer extends React.Component<LeftDrawerProps> {
-
+    onClose = () => { this.props.onClose(); }
     render() {
         return (
-            <Drawer open={this.props.openDrawer} onClose={() => { this.props.onClose() }}>
+            <Drawer open={this.props.openDrawer} onClose={this.onClose} >
                 <DrawerContent>
                     <List component="nav" aria-label="mailbox folders">
-                        <SimpleLinkComponent to="/team">
+                        <SimpleLinkComponent to="/team" linkClicked={() => { this.props.onClose(); }}>
                             <ListItem button>
                                 <ListItemText primary="Team" />
                             </ListItem>
@@ -42,6 +42,6 @@ export class LeftDrawer extends React.Component<LeftDrawerProps> {
                         </ListItem>
                     </List>
                 </DrawerContent>
-            </Drawer>);
+            </Drawer >);
     }
 }
