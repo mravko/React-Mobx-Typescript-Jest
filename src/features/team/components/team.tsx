@@ -41,7 +41,7 @@ export class TeamComponent extends React.Component<TeamComponentProps> {
     }
     render() {
         return (
-            <React.Fragment>
+            <Paper>
                 <SettingsComponent />
                 <StyledPaper>
                     <StyledTable>
@@ -54,16 +54,17 @@ export class TeamComponent extends React.Component<TeamComponentProps> {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.props.teamStore.players.map(pl => (
-                                <TableRow key={pl.id}>
-                                    {this.props.teamStore.playerAttributes.map((pa) =>
-                                        (<TableCell key={pl[pa]}>{pl[pa]}</TableCell>))}
-                                </TableRow>
+                            {
+                                this.props.teamStore.players.map(pl => (
+                                    <TableRow key={pl.id}>
+                                        {this.props.teamStore.playerAttributes.map((pa) =>
+                                            (<TableCell key={pl[pa]}>{pl[pa]}</TableCell>))}
+                                    </TableRow>
                             ))}
                         </TableBody>
                     </StyledTable>
                 </StyledPaper>
-            </React.Fragment>
+            </Paper>
         );
     }
 }

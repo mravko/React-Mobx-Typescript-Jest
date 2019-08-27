@@ -17,9 +17,9 @@ export class WeightedDistComponent extends React.Component<WeightedDistProps> {
 					aria-labelledby="discrete-slider"
 					valueLabelDisplay="auto"
 					marks
-					step={1}
+					step={0.1}
 					min={0}
-					max={10}
+					max={1}
 				/>
 			</React.Fragment>);
 	}

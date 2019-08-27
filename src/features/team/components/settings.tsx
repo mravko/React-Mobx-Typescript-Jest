@@ -7,7 +7,7 @@ import styled from "styled-components";
 const SettingsComponentWrapper = styled.div`
 	width: 300px;
 	margin: 0 auto;
-	margin-top: 10px;
+	margin-top: 20px;
 `;
 
 class SettingsProps {

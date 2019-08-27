@@ -38,10 +38,14 @@ module.exports = {
     },
     output: {
         path: __dirname + '/dist',
-        filename: 'bundle_[hash].js'
+        filename: 'bundle_[hash].js',
+        publicPath: "/"
+    },
+    devServer: {
+        historyApiFallback: true,
     },
     plugins: [new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
+    new HtmlWebpackPlugin({
         title: 'Dev app',
         filename: 'index.html',
         template: 'index.dev.html'
