@@ -11,9 +11,6 @@ import styled from 'styled-components';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
-import purple from '@material-ui/core/colors/purple';
-import green from '@material-ui/core/colors/green';
-
 interface AppProps { userStore?: UserStore; }
 
 const AppComponent = styled.div`
@@ -23,8 +20,7 @@ const AppComponent = styled.div`
 
 const defaultTheme = createMuiTheme({
     palette: {
-        primary: purple,
-        secondary: green,
+        primary: { main: '#37003c' }
     }
 });
 
@@ -36,7 +32,6 @@ export class App extends React.Component<AppProps> {
         return (
             <ThemeProvider theme={defaultTheme}>
                 <AppComponent>
-
                     <TopBar />
                     <React.Fragment>
                         <Route exact path="/" component={null} />
@@ -49,7 +44,6 @@ export class App extends React.Component<AppProps> {
                         <Route path="/loan" component={LoanComponent} />
                         <Route path="/team" component={TeamComponent} />
                     </React.Fragment>
-
                 </AppComponent>
             </ThemeProvider>
         );
