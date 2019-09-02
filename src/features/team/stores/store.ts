@@ -1,5 +1,6 @@
 import { BaseStore } from "../../../common/stores/base-store";
 import { observable, action, computed, runInAction } from "mobx";
+import axios from "axios";
 
 export class TeamStore extends BaseStore {
 	constructor() {
@@ -19,7 +20,25 @@ export class TeamStore extends BaseStore {
 
 	@action
 	getTeam() {
-		this.players.push({ id: 1, name: "marko", value: 10 });
+		axios.get("http://localhost:5000/api")
+		.then((response) => {
+			runInAction(() => {
+				this.setTeam(response.data);
+			});
+		  })
+		  .catch((error) => {
+			// handle error
+			console.log(error);
+		  })
+	}
+
+	@action
+	setTeam(team: []){
+		this.players.splice(0, this.players.length);
+
+		team.forEach(player => {
+			this.players.push(player);
+		});
 	}
 
 	@action

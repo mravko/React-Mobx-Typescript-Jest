@@ -9,13 +9,26 @@ import { UserStore } from "./common/stores/user-store";
 import { RegistryStore } from "./features/registry/stores/store"
 import { TeamStore } from "./features/team/stores/store";
 
-configure({ enforceActions: "always" });
-
+import * as signalR from "@aspnet/signalr";
 const stores = {
     registryStore: new RegistryStore(),
     userStore: new UserStore(),
     teamStore: new TeamStore()
 }
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("http://localhost:5000/hub")       
+    .configureLogging(signalR.LogLevel.Trace)
+    .build();
+
+connection.start().catch(err => {debugger; console.log(err) });
+
+connection.on("ReceiveData", (data: string) => {
+    console.log(data);
+    const team = JSON.parse(data);
+    stores.teamStore.setTeam(team);
+ }); 
+
+configure({ enforceActions: "always" });
 
 ReactDOM.render(
     <Provider {...stores}>

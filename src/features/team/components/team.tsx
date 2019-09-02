@@ -14,9 +14,7 @@ const StyledPaper = withTheme(styled(Paper)`
     }
 `);
 const StyledTable = styled(Table)`
-    && {
-        min-width: 650;
-    }
+    
 `;
 function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
     return { name, calories, fat, carbs, protein };
@@ -44,25 +42,27 @@ export class TeamComponent extends React.Component<TeamComponentProps> {
             <Paper>
                 <SettingsComponent />
                 <StyledPaper>
-                    <StyledTable>
-                        <TableHead>
-                            <TableRow>
+                    <div className="table-responsive">
+                        <StyledTable>
+                            <TableHead>
+                                <TableRow>
+                                    {
+                                        this.props.teamStore.playerAttributes.map((pa) =>
+                                            (<TableCell key={pa}>{pa}</TableCell>))
+                                    }
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
                                 {
-                                    this.props.teamStore.playerAttributes.map((pa) =>
-                                        (<TableCell key={pa}>{pa}</TableCell>))
-                                }
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {
-                                this.props.teamStore.players.map(pl => (
-                                    <TableRow key={pl.id}>
-                                        {this.props.teamStore.playerAttributes.map((pa) =>
-                                            (<TableCell key={pl[pa]}>{pl[pa]}</TableCell>))}
-                                    </TableRow>
-                            ))}
-                        </TableBody>
-                    </StyledTable>
+                                    this.props.teamStore.players.map(pl => (
+                                        <TableRow key={pl.Id}>
+                                            {this.props.teamStore.playerAttributes.map((pa) =>
+                                                (<TableCell key={pl[pa]}>{pl[pa]}</TableCell>))}
+                                        </TableRow>
+                                    ))}
+                            </TableBody>
+                        </StyledTable>
+                    </div>
                 </StyledPaper>
             </Paper>
         );
